@@ -3,14 +3,14 @@ using DG.Tweening;
 using UniRx;
 using Cysharp.Threading.Tasks;
 
-public class PanelAnimator : MonoBehaviour
+public class PanelMoveAnimator : MonoBehaviour
 {
-    [SerializeField] private RectTransform panel; // Panel to animate
-    [SerializeField] private Vector2 offScreenPosition; // Position off the screen
-    [SerializeField] private float animationDuration = 0.5f; // Duration of the animation
+    [SerializeField] private RectTransform panel;
+    [SerializeField] private Vector2 offScreenPosition;
+    [SerializeField] private float animationDuration = 0.5f;
 
-    private Vector2 _originalPosition; // Panel's original position
-    private bool _isVisible; // State of the panel
+    private Vector2 _originalPosition; 
+    private bool _isVisible;
 
     private void Awake()
     {
@@ -25,8 +25,7 @@ public class PanelAnimator : MonoBehaviour
         // Initialize the panel's position off-screen
         panel.anchoredPosition = offScreenPosition;
     }
-
-    [ContextMenu("ShowPanel")]
+    
     public async UniTask ShowPanel()
     {
         if (_isVisible) return;
@@ -38,8 +37,7 @@ public class PanelAnimator : MonoBehaviour
             .SetEase(Ease.Linear)
             .ToUniTask();
     }
-
-    [ContextMenu("HidePanel")]
+    
     public async UniTask HidePanel()
     {
         if (!_isVisible) return;

@@ -28,7 +28,7 @@ public class MineSelectionCanvasController
     private async UniTask ShowMineSelection()
     {
         await UniTask.WhenAll(
-            _view.BlackFadeInFadeOut.ShowPanel(),
+            _view.BlackFadeInFadeOut.FadeIn(),
             _view.MineSelection.ShowPanel()
         );
     }
@@ -36,7 +36,7 @@ public class MineSelectionCanvasController
     private async UniTask HideMineSelection()
     {
         await UniTask.WhenAll(
-            _view.BlackFadeInFadeOut.HidePanel(),
+            _view.BlackFadeInFadeOut.FadeOut(),
             _view.MineSelection.HidePanel()
         );
     }

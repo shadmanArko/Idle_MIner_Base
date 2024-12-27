@@ -647,7 +647,6 @@ GameObject:
   - component: {fileID: 8367682884826279628}
   - component: {fileID: 8367682884826279629}
   - component: {fileID: 8367682884826279626}
-  - component: {fileID: 8367682884826279631}
   - component: {fileID: 8367682884826279630}
   m_Layer: 5
   m_Name: btn_Go
@@ -757,27 +756,6 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 8367682884826279629}
   m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &8367682884826279631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8367682884826279624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bb501adc62c7394fae41ae7a6032eb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnButtonPress:
-    m_PersistentCalls:
-      m_Calls: []
-  OnButtonRelease:
-    m_PersistentCalls:
-      m_Calls: []
-  OnButtonHeld:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &8367682884826279630

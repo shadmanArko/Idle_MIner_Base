@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class ButtonAnimation : MonoBehaviour
+public class ButtonMoveAnimator : MonoBehaviour
 {
     [SerializeField] private Button button;
     [SerializeField] private RectTransform buttonRectTransform;
