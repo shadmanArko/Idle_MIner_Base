@@ -20,13 +20,29 @@ namespace GameCode.Elevator
             _financeModel = financeModel;
 
             _level = new ReactiveProperty<int>(level);
+            
             StashAmount = new ReactiveProperty<double>();
-            SkillMultiplier = Mathf.Pow(_config.ActorSkillIncrementPerShaft, 1) * Mathf.Pow(config.ActorUpgradeSkillIncrement, _level.Value - 1);
-            _upgradePrice = new ReactiveProperty<double>(BasePrice * Mathf.Pow(_config.ActorUpgradePriceIncrement, _level.Value - 1));
+            _upgradePrice = new ReactiveProperty<double>();
+            
             CanUpgrade = _financeModel.Money
-                .Select(money => money >= _upgradePrice.Value)
+                .CombineLatest(_upgradePrice, (money, price) => money >= price)
                 .ToReadOnlyReactiveProperty()
                 .AddTo(disposable);
+            
+            // Update dependent properties when the level changes
+            _level.Subscribe(_ => UpdateLevelDependentProperties()).AddTo(disposable);
+            
+            // Initialize dependent properties
+            UpdateLevelDependentProperties();
+            
+        }
+
+        private void UpdateLevelDependentProperties()
+        {
+            SkillMultiplier = Mathf.Pow(_config.ActorSkillIncrementPerShaft, 1) *
+                              Mathf.Pow(_config.ActorUpgradeSkillIncrement, _level.Value - 1);
+            _upgradePrice.Value = BasePrice * Mathf.Pow(_config.ActorUpgradePriceIncrement, _level.Value - 1);
+
         }
 
         public double SkillMultiplier { get; set; }
