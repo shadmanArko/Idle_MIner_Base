@@ -21,6 +21,8 @@ namespace GameCode.Init
         [SerializeField] private ElevatorView _elevatorView;
         [SerializeField] private WarehouseView _warehouseView;
         [SerializeField] private Transform _mineshaftStartingPosition;
+
+        [SerializeField] private UnitOfWork _unitOfWork;
         
 
         private void Start()
@@ -44,8 +46,8 @@ namespace GameCode.Init
             mineshaftFactory.CreateMineshaft(1,1, _mineshaftStartingPosition.position);
 
             //Elevator
-            var elevatorModel = new ElevatorModel(1, _gameConfig, financeModel, disposable);
-            new ElevatorController(_elevatorView, elevatorModel, mineshaftCollectionModel, _gameConfig, disposable);
+            var elevatorModel = new ElevatorModel(1, _gameConfig, financeModel, disposable, _unitOfWork);
+            new ElevatorController(_elevatorView, elevatorModel, mineshaftCollectionModel, _gameConfig, _unitOfWork, _mineSelectionCanvasView, disposable);
             
             //Warehouse
             var warehouseModel = new WarehouseModel(1, _gameConfig, financeModel, disposable);

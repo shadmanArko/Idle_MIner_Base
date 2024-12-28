@@ -8,24 +8,24 @@ namespace GameCode.Persistence
     {
         public override async Task Load()
         {
-            if (!File.Exists(GameDataFilePath))
+            if (!File.Exists(SaveDataFilePath))
             {
                 return;
             }
             
-            using var gameDataFileReader = new StreamReader(GameDataFilePath);
+            using var gameDataFileReader = new StreamReader(SaveDataFilePath);
             var gameDataJson = await gameDataFileReader.ReadToEndAsync();
-            // Debug.Log(gameDataJson);
+            Debug.Log(gameDataJson);
             JsonUtility.FromJsonOverwrite(gameDataJson, saveData);
         }
 
         public override async Task Save()
         {
             var json = JsonUtility.ToJson(saveData);
-            using var writer = new StreamWriter(GameDataFilePath);
+            using var writer = new StreamWriter(SaveDataFilePath);
             await writer.WriteAsync(json);
         }
         
-        private string GameDataFilePath => $"{Application.persistentDataPath}/game_data.json";
+        private string SaveDataFilePath => $"{Application.persistentDataPath}/Saves/save_data.json";
     }
 }

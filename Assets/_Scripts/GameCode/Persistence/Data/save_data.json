@@ -1,0 +1,10 @@
+{
+  "mines": [
+    {
+      "id": "mine01",
+      "price": 12,
+      "quantity": 11,
+      "elevatorLevel": 0
+    }
+  ]
+}

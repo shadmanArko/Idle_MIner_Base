@@ -13,11 +13,13 @@ namespace GameCode.Elevator
         private readonly FinanceModel _financeModel;
         private readonly IReactiveProperty<double> _upgradePrice;
         private readonly IReactiveProperty<int> _level;
+        private readonly UnitOfWork _unitOfWork;
 
-        public ElevatorModel(int level, GameConfig config, FinanceModel financeModel, CompositeDisposable disposable)
+        public ElevatorModel(int level, GameConfig config, FinanceModel financeModel, CompositeDisposable disposable, UnitOfWork unitOfWork)
         {
             _config = config;
             _financeModel = financeModel;
+            _unitOfWork = unitOfWork;
 
             _level = new ReactiveProperty<int>(level);
             
@@ -62,8 +64,22 @@ namespace GameCode.Elevator
             _upgradePrice.Value *= _config.ActorUpgradePriceIncrement;
             _financeModel.DrawResource(upgradePrice);
             _level.Value++;
+            SaveLevel();
         }
-        
+
+        private void SaveLevel()
+        {
+             var mine = _unitOfWork.Mines.GetById("mine01");
+             mine.elevatorLevel = _level.Value;
+            _unitOfWork.Mines.Modify(mine);
+            _unitOfWork.Save();
+        }
+
+        public void LoadLevel(int newLevel)
+        {
+            _level.Value = newLevel;
+        }
+
         public double DrawResource(double amount)
         {
             var result = 0d;

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GameCode.Persistence;
+using GameCode.Persistence.Models;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -16,10 +17,10 @@ public abstract class DataContext : MonoBehaviour
 
     public List<T> Set<T>()
     {
-        // if (typeof(T) == typeof(Player))
-        // {
-        //     return playerData.players as List<T>;
-        // }
+        if (typeof(T) == typeof(Mine))
+        {
+            return saveData.mines as List<T>;
+        }
         //
         // if (typeof(T) == typeof(Temple))
         // {

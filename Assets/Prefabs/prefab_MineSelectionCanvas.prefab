@@ -2884,6 +2884,9 @@ MonoBehaviour:
   _closeMineSelection: {fileID: 301193998380366137}
   _goToMine01: {fileID: 301193999543713913}
   _goToMine02: {fileID: 8084512628973819869}
+  _mineSelectionButtons:
+  - {fileID: 7428735425800438712}
+  - {fileID: 1371294123710911516}
 --- !u!1 &301193999768227155
 GameObject:
   m_ObjectHideFlags: 0
@@ -5245,6 +5248,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 301193999506636363}
     m_Modifications:
+    - target: {fileID: 1669110214350466315, guid: 0ca62c4b376194c5d9c5009723b2bd60,
+        type: 3}
+      propertyPath: mineName
+      value: mine02
+      objectReference: {fileID: 0}
     - target: {fileID: 8367682883388266424, guid: 0ca62c4b376194c5d9c5009723b2bd60,
         type: 3}
       propertyPath: m_Name
@@ -5288,7 +5296,7 @@ PrefabInstance:
     - target: {fileID: 8367682883388266427, guid: 0ca62c4b376194c5d9c5009723b2bd60,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -51.999996
+      value: -52
       objectReference: {fileID: 0}
     - target: {fileID: 8367682883388266427, guid: 0ca62c4b376194c5d9c5009723b2bd60,
         type: 3}
@@ -5357,6 +5365,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca62c4b376194c5d9c5009723b2bd60, type: 3}
+--- !u!114 &1371294123710911516 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1669110214350466315, guid: 0ca62c4b376194c5d9c5009723b2bd60,
+    type: 3}
+  m_PrefabInstance: {fileID: 301194000479254807}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb91302c95014aca8c3b8b8ae50e9f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8084512628973819869 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8367682884826279626, guid: 0ca62c4b376194c5d9c5009723b2bd60,
@@ -5382,6 +5402,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 301193999506636363}
     m_Modifications:
+    - target: {fileID: 1669110214350466315, guid: 0ca62c4b376194c5d9c5009723b2bd60,
+        type: 3}
+      propertyPath: mineName
+      value: mine01
+      objectReference: {fileID: 0}
     - target: {fileID: 8367682883388266424, guid: 0ca62c4b376194c5d9c5009723b2bd60,
         type: 3}
       propertyPath: m_Name
@@ -5510,5 +5535,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7428735425800438712 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1669110214350466315, guid: 0ca62c4b376194c5d9c5009723b2bd60,
+    type: 3}
+  m_PrefabInstance: {fileID: 8084512629649305267}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb91302c95014aca8c3b8b8ae50e9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
