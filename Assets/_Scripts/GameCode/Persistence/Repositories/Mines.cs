@@ -4,7 +4,7 @@ using GameCode.Persistence.Models;
 namespace GameCode.Persistence.Repositories
 {
     [Serializable]
-    public class Shops : Repository<Shop>
+    public class Mines : Repository<Mine>
     {
         
     }

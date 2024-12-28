@@ -2,6 +2,7 @@ using System.IO;
 using System.Threading.Tasks;
 using GameCode.Persistence.Repositories;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GameCode.Persistence
 {
@@ -10,7 +11,7 @@ namespace GameCode.Persistence
         public DataContext context;
 
         [Header("Repositories")] 
-        public Shops shops;
+        public Mines mines;
         
         [Header("Other Dependencies")] 
         public TextAsset saveDataJsonFile;
@@ -43,7 +44,7 @@ namespace GameCode.Persistence
 
         private void BindContexts()
         {
-            shops.context = context;
+            mines.context = context;
         }
 
         private async Task BootstrapSaveData()

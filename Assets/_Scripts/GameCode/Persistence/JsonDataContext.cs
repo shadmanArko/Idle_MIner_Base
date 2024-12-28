@@ -16,12 +16,12 @@ namespace GameCode.Persistence
             using var gameDataFileReader = new StreamReader(GameDataFilePath);
             var gameDataJson = await gameDataFileReader.ReadToEndAsync();
             // Debug.Log(gameDataJson);
-            JsonUtility.FromJsonOverwrite(gameDataJson, gameData);
+            JsonUtility.FromJsonOverwrite(gameDataJson, saveData);
         }
 
         public override async Task Save()
         {
-            var json = JsonUtility.ToJson(gameData);
+            var json = JsonUtility.ToJson(saveData);
             using var writer = new StreamWriter(GameDataFilePath);
             await writer.WriteAsync(json);
         }

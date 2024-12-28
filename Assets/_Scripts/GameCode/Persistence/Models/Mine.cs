@@ -1,6 +1,9 @@
+using System;
+
 namespace GameCode.Persistence.Models
 {
-    public class Shop : Base
+    [Serializable]
+    public class Mine : Base
     {
         public int price;
         public int quantity;

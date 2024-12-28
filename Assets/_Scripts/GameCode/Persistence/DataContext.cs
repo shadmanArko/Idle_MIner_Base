@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GameCode.Persistence;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [Serializable]
 public abstract class DataContext : MonoBehaviour
 {
-    public GameData gameData = new GameData();
+    public SaveData saveData = new SaveData();
     
     public abstract Task Load();
     public abstract Task Save();
