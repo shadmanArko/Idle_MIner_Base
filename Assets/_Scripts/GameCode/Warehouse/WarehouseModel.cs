@@ -10,25 +10,40 @@ namespace GameCode.Warehouse
     {
         private readonly GameConfig _config;
         private readonly FinanceModel _financeModel;
-        
-        
         private const double BasePrice = 60;
         private readonly IReactiveProperty<double> _upgradePrice;
         private readonly IReactiveProperty<int> _level;
+        private readonly UnitOfWork _unitOfWork;
+        private readonly string _mineId;
 
-        public WarehouseModel(int level, GameConfig config, FinanceModel financeModel, CompositeDisposable disposable)
+        public WarehouseModel(int level, GameConfig config, FinanceModel financeModel, CompositeDisposable disposable, UnitOfWork unitOfWork, string mineId)
         {
             _config = config;
             _financeModel = financeModel;
+            _unitOfWork = unitOfWork;
+            _mineId = mineId;
             
             _level = new ReactiveProperty<int>(level);
-            SkillMultiplier = Mathf.Pow(_config.ActorSkillIncrementPerShaft, 1) * Mathf.Pow(config.ActorUpgradeSkillIncrement, _level.Value - 1);
-            _upgradePrice = new ReactiveProperty<double>(BasePrice * Mathf.Pow(_config.ActorUpgradePriceIncrement, _level.Value - 1));
+            
+            _upgradePrice = new ReactiveProperty<double>();
+    
             CanUpgrade = _financeModel.Money
-                .Select(money => money >= _upgradePrice.Value)
+                .CombineLatest(_upgradePrice, (money, price) => money >= price)  // Changed to CombineLatest like ElevatorModel
                 .ToReadOnlyReactiveProperty()
                 .AddTo(disposable);
-
+    
+            // Add subscription to level changes
+            _level.Subscribe(_ => UpdateLevelDependentProperties()).AddTo(disposable);
+    
+            // Initialize dependent properties
+            UpdateLevelDependentProperties();
+        }
+        
+        private void UpdateLevelDependentProperties()
+        {
+            SkillMultiplier = Mathf.Pow(_config.ActorSkillIncrementPerShaft, 1) *
+                              Mathf.Pow(_config.ActorUpgradeSkillIncrement, _level.Value - 1);
+            _upgradePrice.Value = BasePrice * Mathf.Pow(_config.ActorUpgradePriceIncrement, _level.Value - 1);
         }
 
         public double SkillMultiplier { get; set; }
@@ -48,6 +63,20 @@ namespace GameCode.Warehouse
             _upgradePrice.Value *= _config.ActorUpgradePriceIncrement;
             _financeModel.DrawResource(upgradePrice);
             _level.Value++;
+            SaveLevel(_mineId);
+        }
+        
+        private void SaveLevel(string mineId)
+        {
+            var mine = _unitOfWork.Mines.GetById(mineId);
+            mine.warehouseLevel = _level.Value;
+            _unitOfWork.Mines.Modify(mine);
+            _unitOfWork.Save();
+        }
+
+        public void LoadLevel(int newLevel)
+        {
+            _level.Value = newLevel;
         }
     }
 }

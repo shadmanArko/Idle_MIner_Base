@@ -57,7 +57,7 @@ namespace GameCode.Mineshaft
             _collectionModel.ClearAllMineshafts();
         }
 
-        public void LoadMineData(string mineId)
+        public void LoadData(string mineId)
         {
             // Clear existing mineshafts
             //DestroyAllMineshafts();

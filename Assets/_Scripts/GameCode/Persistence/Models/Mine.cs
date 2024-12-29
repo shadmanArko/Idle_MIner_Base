@@ -9,6 +9,7 @@ namespace GameCode.Persistence.Models
         public int price;
         public int quantity;
         public int elevatorLevel;
-        public List<MineshaftData> mineshafts; 
+        public List<MineshaftData> mineshafts;
+        public int warehouseLevel;
     }
 }

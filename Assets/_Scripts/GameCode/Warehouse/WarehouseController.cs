@@ -8,11 +8,13 @@ namespace GameCode.Warehouse
     public class WarehouseController
     {
         private readonly WarehouseModel _model;
+        private readonly UnitOfWork _unitOfWork;
 
         public WarehouseController(WarehouseView view, WarehouseModel model, ElevatorModel elevatorModel,
-            GameConfig config, CompositeDisposable disposable)
+            GameConfig config, CompositeDisposable disposable, UnitOfWork unitOfWork)
         {
             _model = model;
+            _unitOfWork = unitOfWork;
 
             var workerModel = new WorkerModel(model, config.WarehouseWorkerConfig, disposable);
             new WarehouseWorkerController(view, model, workerModel, elevatorModel, disposable);
@@ -37,6 +39,12 @@ namespace GameCode.Warehouse
         private void Upgrade()
         {
             _model.Upgrade();
+        }
+        
+        public void LoadData(string mineId)
+        {
+            var mine = _unitOfWork.Mines.GetById(mineId);
+            _model.LoadLevel(mine.warehouseLevel);
         }
     }
 }

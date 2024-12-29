@@ -45,18 +45,18 @@ namespace GameCode.Init
             var mineshaftCollectionModel = new MineshaftCollectionModel();
             await Task.Delay(2000);
             var mineshaftFactory = new MineshaftFactory(mineshaftCollectionModel, financeModel, _gameConfig, _unitOfWork, disposable);
-            mineshaftFactory.LoadMineData(PlayerPrefs.GetString("CurrentMine"));
+            //mineshaftFactory.LoadMineData(PlayerPrefs.GetString("CurrentMine"));
             //mineshaftFactory.CreateMineshaft(1,1, _mineshaftStartingPosition.position, "mine01");
 
             //Elevator
-            var elevatorModel = new ElevatorModel(1, _gameConfig, financeModel, disposable, _unitOfWork);
-            new ElevatorController(_elevatorView, elevatorModel, mineshaftCollectionModel, _gameConfig, _unitOfWork, _mineSelectionCanvasView, disposable);
+            var elevatorModel = new ElevatorModel(1, _gameConfig, financeModel, disposable, _unitOfWork, PlayerPrefs.GetString("CurrentMine") );
+            var elevatorController =  new ElevatorController(_elevatorView, elevatorModel, mineshaftCollectionModel, _gameConfig, _unitOfWork, _mineSelectionCanvasView, disposable);
             
             //Warehouse
-            var warehouseModel = new WarehouseModel(1, _gameConfig, financeModel, disposable);
-            new WarehouseController(_warehouseView, warehouseModel, elevatorModel, _gameConfig, disposable);
-            
-            
+            var warehouseModel = new WarehouseModel(1, _gameConfig, financeModel, disposable, _unitOfWork, PlayerPrefs.GetString("CurrentMine") );
+            var warehouseController = new WarehouseController(_warehouseView, warehouseModel, elevatorModel, _gameConfig, disposable, _unitOfWork);
+
+            new LoadManager(elevatorController, mineshaftFactory,PlayerPrefs.GetString("CurrentMine"), warehouseController);
         }
     }
 }
