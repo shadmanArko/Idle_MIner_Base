@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class SaveManager : MonoBehaviour, IDisposable
+public class SaveManager : MonoBehaviour
 {
     [SerializeField] private UnitOfWork _unitOfWork;
 
@@ -10,18 +10,15 @@ public class SaveManager : MonoBehaviour, IDisposable
         InvokeRepeating(nameof(SaveData), 5.0f, 5.0f);
     }
 
-    private void SaveData()
-    {
-        _unitOfWork.Save();
-    }
+    private void SaveData() => _unitOfWork.Save();
 
-    public void Dispose()
-    {
-        SaveData();
-    }
-
-    private void OnDestroy()
-    {
-        SaveData();
-    }
+    // public void Dispose()
+    // {
+    //     SaveData();
+    // }
+    //
+    // private void OnDestroy()
+    // {
+    //     SaveData();
+    // }
 }
