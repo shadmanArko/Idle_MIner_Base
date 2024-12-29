@@ -22,9 +22,7 @@ public class ButtonMoveAnimator : MonoBehaviour
             return;
         }
 
-        // Save the original position of the button
-        originalPosition = buttonRectTransform.localPosition;
-
+        
         // Observe the button's hold and release events
         var buttonDownStream = button.OnPointerDownAsObservable();
         var buttonUpStream = button.OnPointerUpAsObservable();
@@ -40,6 +38,7 @@ public class ButtonMoveAnimator : MonoBehaviour
 
     private UniTask MoveToPosition(Vector3 position)
     {
+        originalPosition = buttonRectTransform.localPosition;
         return buttonRectTransform
             .DOLocalMove(position, animationDuration)
             .SetEase(Ease.OutQuad)

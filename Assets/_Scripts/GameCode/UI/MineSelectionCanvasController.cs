@@ -14,8 +14,8 @@ public class MineSelectionCanvasController
 
         BindButton(_view.OpenMineSelection.OnClickAsObservable(), async () => await ShowMineSelection(), disposable);
         BindButton(_view.CloseMineSelection.OnClickAsObservable(), async () => await HideMineSelection(), disposable);
-        BindButton(_view.GoToMine01.OnClickAsObservable(), async () => await GoToMine("Mine01"), disposable);
-        BindButton(_view.GoToMine02.OnClickAsObservable(), async () => await GoToMine("Mine02"), disposable);
+        BindButton(_view.MineSelectionButtonMine01.Button.OnClickAsObservable(), async () => await SelectMine("mine01"), disposable);
+        BindButton(_view.MineSelectionButtonMine02.Button.OnClickAsObservable(), async () => await SelectMine("mine02"), disposable);
     }
 
     private void BindButton(IObservable<Unit> buttonObservable, Func<UniTask> action, CompositeDisposable disposable)
@@ -41,15 +41,13 @@ public class MineSelectionCanvasController
         );
     }
 
-    private async UniTask GoToMine(string mineName)
+    private async UniTask SelectMine(string mineId)
     {
+        await _view.MineSelectionButtonMine01.SetCurrentMine(mineId);
         await HideMineSelection();
-        await OpenMine(mineName);
-    }
-
-    private async UniTask OpenMine(string mineName)
-    {
+        await _view.CircleFadeIn.FadeIn();
         await UniTask.DelayFrame(1); 
-        Debug.Log($"Opening {mineName}");
+        await _view.MineSelectionButtonMine01.RestartCurrentSceneAsync();
     }
+    
 }

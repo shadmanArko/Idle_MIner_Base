@@ -1,30 +1,38 @@
+using System;
+using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cysharp.Threading.Tasks;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class MineSelectionButton : MonoBehaviour
 {
-    [FormerlySerializedAs("mineName")] public string mineId;
+    private Button _button;
+    //[SerializeField] private ButtonMoveAnimator _buttonMoveAnimator;
+    
+    public Button Button => _button;
+   // public ButtonMoveAnimator ButtonMoveAnimator => _buttonMoveAnimator;
+    
+    private void Start()
+    {
+        _button = GetComponent<Button>();
+        //_buttonMoveAnimator = GetComponent<ButtonMoveAnimator>();
+    }
 
-    public void SetCurrentMine()
+    public async UniTask SetCurrentMine(string mineId)
     {
         PlayerPrefs.SetString("CurrentMine", mineId);
         PlayerPrefs.Save();
         
         Debug.Log(PlayerPrefs.GetString("CurrentMine"));
     }
-
-    public void RestartCurrentScene()
-    {
-        RestartCurrentSceneAsync();
-    }
-
-    private async void RestartCurrentSceneAsync()
+    
+    public async UniTask RestartCurrentSceneAsync()
     {
         string currentScene = SceneManager.GetActiveScene().name;
         var operation = SceneManager.LoadSceneAsync(currentScene);
-    
-        // Optional: You can monitor the loading progress
+        
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);

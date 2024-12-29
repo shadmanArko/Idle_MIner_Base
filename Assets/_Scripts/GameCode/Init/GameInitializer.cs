@@ -3,6 +3,7 @@ using GameCode.CameraRig;
 using GameCode.Elevator;
 using GameCode.Finance;
 using GameCode.Mineshaft;
+using GameCode.Persistence;
 using GameCode.Tutorial;
 using GameCode.UI;
 using GameCode.Warehouse;
@@ -24,11 +25,12 @@ namespace GameCode.Init
         [SerializeField] private Transform _mineshaftStartingPosition;
 
         [SerializeField] private UnitOfWork _unitOfWork;
+        [SerializeField] private Initializer _dataInitializer;
         
 
         private async void Start()
         {
-            await Task.Delay(2000);
+            await _dataInitializer.LoadDataAsync();
             var disposable = new CompositeDisposable().AddTo(this);
 
             var tutorialModel = new TutorialModel();

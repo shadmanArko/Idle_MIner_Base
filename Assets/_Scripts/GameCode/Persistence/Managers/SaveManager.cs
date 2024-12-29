@@ -7,13 +7,12 @@ public class SaveManager : MonoBehaviour, IDisposable
 
     private void Start()
     {
-        //InvokeRepeating(nameof(SaveData), 5.0f, 5.0f);
+        InvokeRepeating(nameof(SaveData), 5.0f, 5.0f);
     }
 
     private void SaveData()
     {
         _unitOfWork.Save();
-        Debug.Log("data saved");
     }
 
     public void Dispose()

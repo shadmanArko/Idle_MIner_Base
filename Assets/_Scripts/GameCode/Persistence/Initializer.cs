@@ -18,12 +18,12 @@ namespace GameCode.Persistence
 
         private static string SaveDataFilePath => $"{Application.persistentDataPath}/Saves/save_data.json";
 
-        private async void Start()
-        {
-            await LoadDataAsync();
-        }
+        // private async void Start()
+        // {
+        //     await LoadDataAsync();
+        // }
 
-        private async Task LoadDataAsync()
+        public async Task LoadDataAsync()
         {
             Debug.Log(Application.persistentDataPath);
             var rootSaveDirectory = Path.Combine(Application.persistentDataPath, "Saves");

@@ -11,16 +11,17 @@ namespace GameCode.UI
         [SerializeField] private PanelAlphaAnimator _blackFadeInFadeOut;
         [SerializeField] private PanelMoveAnimator _mineSelection;
         [SerializeField] private Button _closeMineSelection;
-        [SerializeField] private Button _goToMine01;
-        [SerializeField] private Button _goToMine02;
-        [SerializeField] private List<MineSelectionButton> _mineSelectionButtons;
+        [SerializeField] private CircleFadePanel _circleFadeIn;
+        [SerializeField] private MineSelectionButton _mineSelectionButtonMine01;
+        [SerializeField] private MineSelectionButton _mineSelectionButtonMine02;
+        
         
         public Button OpenMineSelection => _openMineSelection;
         public PanelAlphaAnimator BlackFadeInFadeOut => _blackFadeInFadeOut;
         public PanelMoveAnimator MineSelection => _mineSelection;
         public Button CloseMineSelection => _closeMineSelection;
-        public Button GoToMine01 => _goToMine01;
-        public Button GoToMine02 => _goToMine02;
-        public List<MineSelectionButton> MineSelectionButtons => _mineSelectionButtons;
+        public CircleFadePanel CircleFadeIn => _circleFadeIn;
+        public MineSelectionButton MineSelectionButtonMine01 => _mineSelectionButtonMine01;
+        public MineSelectionButton MineSelectionButtonMine02 => _mineSelectionButtonMine02;
     }
 }

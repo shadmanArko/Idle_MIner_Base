@@ -15,7 +15,6 @@ namespace GameCode.Persistence
             
             using var gameDataFileReader = new StreamReader(SaveDataFilePath);
             var gameDataJson = await gameDataFileReader.ReadToEndAsync();
-            Debug.Log(gameDataJson);
             JsonUtility.FromJsonOverwrite(gameDataJson, saveData);
         }
 
