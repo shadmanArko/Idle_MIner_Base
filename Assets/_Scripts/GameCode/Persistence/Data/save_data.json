@@ -2,9 +2,33 @@
   "mines": [
     {
       "id": "mine01",
-      "price": 12,
-      "quantity": 11,
-      "elevatorLevel": 0
+      "elevatorLevel": 1,
+      "warehouseLevel": 1,
+      "mineshafts": [
+        {
+          "mineshaftNumber": 1,
+          "level": 1,
+          "position": {
+            "x": 1.2999999523162842,
+            "y": -3.1399989128112795
+          }
+        }
+      ]
+    },
+    {
+      "id": "mine02",
+      "elevatorLevel": 1,
+      "warehouseLevel": 1,
+      "mineshafts": [
+        {
+          "mineshaftNumber": 1,
+          "level": 1,
+          "position": {
+            "x": 1.2999999523162842,
+            "y": -3.1399991512298586
+          }
+        }
+      ]
     }
   ]
 }

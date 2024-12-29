@@ -88,7 +88,7 @@ namespace GameCode.Mineshaft
             var mineshaft = mine.mineshafts.FirstOrDefault(data => data.mineshaftNumber == MineshaftNumber);
             mineshaft.level = _level.Value;
             _unitOfWork.Mines.Modify(mine);
-            _unitOfWork.Save();
+            //_unitOfWork.Save();
         }
 
         public void LoadLevel(int newLevel)

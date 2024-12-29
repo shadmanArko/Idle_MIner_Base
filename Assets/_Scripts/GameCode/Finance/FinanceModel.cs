@@ -7,10 +7,12 @@ namespace GameCode.Finance
     {
         private readonly IReactiveProperty<double> _money;
         public IReadOnlyReactiveProperty<double> Money => _money;
+        private readonly UnitOfWork _unitOfWork;
 
-        public FinanceModel()
+        public FinanceModel(CompositeDisposable disposable)
         {
-            _money = new ReactiveProperty<double>(500);
+            _money = new ReactiveProperty<double>(PlayerPrefs.GetFloat("GlobalMoney"));
+            _money.Subscribe(_ => SaveMoney()).AddTo(disposable);
         }
 
         public void AddResource(double amount)
@@ -39,6 +41,20 @@ namespace GameCode.Finance
             }
 
             return result;
+        }
+        
+        private void SaveMoney()
+        {
+            PlayerPrefs.SetFloat("GlobalMoney", (float)_money.Value);
+            PlayerPrefs.Save();
+            //var mine = _unitOfWork.Mines.GetById(mineId);
+            // if (mine == null)
+            // {
+            //     Debug.LogWarning($"No mine {mineId} found!");
+            // }
+            // mine.money = _money.Value;
+            // _unitOfWork.Mines.Modify(mine);
+            //_unitOfWork.Save();
         }
     }
 }

@@ -71,7 +71,7 @@ namespace GameCode.Warehouse
             var mine = _unitOfWork.Mines.GetById(mineId);
             mine.warehouseLevel = _level.Value;
             _unitOfWork.Mines.Modify(mine);
-            _unitOfWork.Save();
+            //_unitOfWork.Save();
         }
 
         public void LoadLevel(int newLevel)

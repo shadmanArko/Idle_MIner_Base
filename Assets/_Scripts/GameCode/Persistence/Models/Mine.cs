@@ -6,10 +6,9 @@ namespace GameCode.Persistence.Models
     [Serializable]
     public class Mine : Base
     {
-        public int price;
-        public int quantity;
         public int elevatorLevel;
-        public List<MineshaftData> mineshafts;
         public int warehouseLevel;
+        public List<MineshaftData> mineshafts;
+        
     }
 }

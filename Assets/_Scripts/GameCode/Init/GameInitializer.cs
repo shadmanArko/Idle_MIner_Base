@@ -28,10 +28,11 @@ namespace GameCode.Init
 
         private async void Start()
         {
+            await Task.Delay(2000);
             var disposable = new CompositeDisposable().AddTo(this);
 
             var tutorialModel = new TutorialModel();
-            var financeModel = new FinanceModel();
+            var financeModel = new FinanceModel(disposable);
             
             new CameraController(_cameraView, tutorialModel);
 
@@ -43,14 +44,13 @@ namespace GameCode.Init
 
             //Mineshaft
             var mineshaftCollectionModel = new MineshaftCollectionModel();
-            await Task.Delay(2000);
             var mineshaftFactory = new MineshaftFactory(mineshaftCollectionModel, financeModel, _gameConfig, _unitOfWork, disposable);
             //mineshaftFactory.LoadMineData(PlayerPrefs.GetString("CurrentMine"));
             //mineshaftFactory.CreateMineshaft(1,1, _mineshaftStartingPosition.position, "mine01");
 
             //Elevator
             var elevatorModel = new ElevatorModel(1, _gameConfig, financeModel, disposable, _unitOfWork, PlayerPrefs.GetString("CurrentMine") );
-            var elevatorController =  new ElevatorController(_elevatorView, elevatorModel, mineshaftCollectionModel, _gameConfig, _unitOfWork, _mineSelectionCanvasView, disposable);
+            var elevatorController =  new ElevatorController(_elevatorView, elevatorModel, mineshaftCollectionModel, _gameConfig, _unitOfWork, disposable);
             
             //Warehouse
             var warehouseModel = new WarehouseModel(1, _gameConfig, financeModel, disposable, _unitOfWork, PlayerPrefs.GetString("CurrentMine") );

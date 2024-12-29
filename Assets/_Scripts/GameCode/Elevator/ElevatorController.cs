@@ -1,6 +1,5 @@
 ﻿using GameCode.Init;
 using GameCode.Mineshaft;
-using GameCode.UI;
 using GameCode.Worker;
 using UniRx;
 using UnityEngine.UI;
@@ -13,7 +12,7 @@ namespace GameCode.Elevator
         private readonly UnitOfWork _unitOfWork;
 
         public ElevatorController(ElevatorView view, ElevatorModel model, MineshaftCollectionModel mineshaftCollectionModel,
-             GameConfig gameConfig, UnitOfWork unitOfWork, MineSelectionCanvasView mineSelectionCanvasView, CompositeDisposable disposable)
+             GameConfig gameConfig, UnitOfWork unitOfWork, CompositeDisposable disposable)
         {
             _model = model;
             _unitOfWork = unitOfWork;
@@ -39,19 +38,7 @@ namespace GameCode.Elevator
                 .Subscribe(upgradePrice => view.AreaUiCanvasView.UpgradeCost = upgradePrice.ToString("F0"))
                 .AddTo(disposable);
             
-            // foreach (var mineSelectionButton in mineSelectionCanvasView.MineSelectionButtons)
-            // {
-            //     // Get the Button component
-            //     var button = mineSelectionButton.GetComponent<Button>();
-            //     if (button != null)
-            //     {
-            //         // Bind button click with the LevelNumber from ButtonData
-            //         button.OnClickAsObservable()
-            //             .Select(_ => mineSelectionButton.mineId)  // Get LevelNumber when clicked
-            //             .Subscribe(LoadData)                 //TODO Send to OpenLevel method
-            //             .AddTo(disposable);
-            //     }
-            // }
+            
         }
 
         private void Upgrade()
