@@ -18,20 +18,23 @@ namespace GameCode.Mineshaft
             _views.Add(mineshaftNumber, view);
             _models.Add(mineshaftNumber, model);
         }
-
-        public int GetCount()
+        
+        public void UnregisterMineshaft(int mineshaftNumber)
         {
-            return _models.Count;
+            _views.Remove(mineshaftNumber);
+            _models.Remove(mineshaftNumber);
         }
 
-        public MineshaftModel GetModel(int mineshaftNumber)
+        public void ClearAllMineshafts()
         {
-            return _models[mineshaftNumber];
+            _views.Clear();
+            _models.Clear();
         }
 
-        public MineshaftView GetView(int mineshaftNumber)
-        {
-            return _views[mineshaftNumber];
-        }
-}
+        public int GetCount() => _models.Count;
+        public MineshaftModel GetModel(int mineshaftNumber) => _models[mineshaftNumber];
+        public MineshaftView GetView(int mineshaftNumber) => _views[mineshaftNumber];
+        public Dictionary<int, MineshaftView>.KeyCollection GetAllMineshaftNumbers() => _views.Keys;
+
+    }
 }

@@ -1,4 +1,5 @@
-﻿using GameCode.CameraRig;
+﻿using System.Threading.Tasks;
+using GameCode.CameraRig;
 using GameCode.Elevator;
 using GameCode.Finance;
 using GameCode.Mineshaft;
@@ -25,7 +26,7 @@ namespace GameCode.Init
         [SerializeField] private UnitOfWork _unitOfWork;
         
 
-        private void Start()
+        private async void Start()
         {
             var disposable = new CompositeDisposable().AddTo(this);
 
@@ -42,8 +43,10 @@ namespace GameCode.Init
 
             //Mineshaft
             var mineshaftCollectionModel = new MineshaftCollectionModel();
-            var mineshaftFactory = new MineshaftFactory(mineshaftCollectionModel, financeModel, _gameConfig, disposable);
-            mineshaftFactory.CreateMineshaft(1,1, _mineshaftStartingPosition.position);
+            await Task.Delay(2000);
+            var mineshaftFactory = new MineshaftFactory(mineshaftCollectionModel, financeModel, _gameConfig, _unitOfWork, disposable);
+            mineshaftFactory.LoadMineData(PlayerPrefs.GetString("CurrentMine"));
+            //mineshaftFactory.CreateMineshaft(1,1, _mineshaftStartingPosition.position, "mine01");
 
             //Elevator
             var elevatorModel = new ElevatorModel(1, _gameConfig, financeModel, disposable, _unitOfWork);
@@ -52,6 +55,8 @@ namespace GameCode.Init
             //Warehouse
             var warehouseModel = new WarehouseModel(1, _gameConfig, financeModel, disposable);
             new WarehouseController(_warehouseView, warehouseModel, elevatorModel, _gameConfig, disposable);
+            
+            
         }
     }
 }

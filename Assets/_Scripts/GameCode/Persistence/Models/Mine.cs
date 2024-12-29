@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace GameCode.Persistence.Models
 {
@@ -8,5 +9,6 @@ namespace GameCode.Persistence.Models
         public int price;
         public int quantity;
         public int elevatorLevel;
+        public List<MineshaftData> mineshafts; 
     }
 }

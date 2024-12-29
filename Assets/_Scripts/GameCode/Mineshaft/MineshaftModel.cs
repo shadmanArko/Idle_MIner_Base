@@ -1,6 +1,8 @@
-﻿using GameCode.Finance;
+﻿using System.Linq;
+using GameCode.Finance;
 using GameCode.GameArea;
 using GameCode.Init;
+using GameCode.Persistence.Models;
 using UniRx;
 using UnityEngine;
 
@@ -11,8 +13,10 @@ namespace GameCode.Mineshaft
         private const double BasePrice = 60;
         private readonly GameConfig _config;
         private readonly FinanceModel _financeModel;
+        private readonly UnitOfWork _unitOfWork;
         
         public int MineshaftNumber { get; }
+        public string MineId { get; }
 
         public IReadOnlyReactiveProperty<bool> CanUpgrade { get; }
 
@@ -26,11 +30,14 @@ namespace GameCode.Mineshaft
         public double NextShaftPrice { get; }
         public IReadOnlyReactiveProperty<bool> CanBuyNextShaft { get; }
 
-        public MineshaftModel(int shaftNumber, int level, GameConfig config, FinanceModel financeModel, CompositeDisposable disposable)
+        public MineshaftModel(int shaftNumber, int level, Vector2 position, GameConfig config,
+            FinanceModel financeModel, CompositeDisposable disposable, UnitOfWork unitOfWork, string mineId, bool isNew)
         {
             MineshaftNumber = shaftNumber;
             _config = config;
             _financeModel = financeModel;
+            _unitOfWork = unitOfWork;
+            MineId = mineId;
             
             _level = new ReactiveProperty<int>(level);
             StashAmount = new ReactiveProperty<double>();
@@ -47,6 +54,19 @@ namespace GameCode.Mineshaft
                 .Select(money => money >= NextShaftPrice)
                 .ToReadOnlyReactiveProperty()
                 .AddTo(disposable);
+
+            if (isNew)
+            {
+                var mineshaftData = new MineshaftData
+                {
+                    mineshaftNumber = MineshaftNumber,
+                    level = _level.Value,
+                    position = position
+                };
+                var mine = _unitOfWork.Mines.GetById(MineId);
+                mine.mineshafts.Add(mineshaftData);
+            }
+           
         }
 
         public void Upgrade()
@@ -59,6 +79,21 @@ namespace GameCode.Mineshaft
             _upgradePrice.Value *= _config.ActorUpgradePriceIncrement;
             _financeModel.DrawResource(price);
             _level.Value++;
+            SaveLevel();
+        }
+        
+        private void SaveLevel()
+        {
+            var mine = _unitOfWork.Mines.GetById(MineId);
+            var mineshaft = mine.mineshafts.FirstOrDefault(data => data.mineshaftNumber == MineshaftNumber);
+            mineshaft.level = _level.Value;
+            _unitOfWork.Mines.Modify(mine);
+            _unitOfWork.Save();
+        }
+
+        public void LoadLevel(int newLevel)
+        {
+            _level.Value = newLevel;
         }
 
         public void BuyNextShaft()
