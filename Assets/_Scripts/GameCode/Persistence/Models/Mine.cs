@@ -9,6 +9,6 @@ namespace GameCode.Persistence.Models
         public int elevatorLevel;
         public int warehouseLevel;
         public List<MineshaftData> mineshafts;
-        
+        public double elevatorStashAmount;
     }
 }

@@ -25,7 +25,7 @@ namespace GameCode.Elevator
 
             _level = new ReactiveProperty<int>(level);
             
-            StashAmount = new ReactiveProperty<double>();
+            StashAmount = new ReactiveProperty<double>(_unitOfWork.Mines.GetById(mineId).elevatorStashAmount);
             _upgradePrice = new ReactiveProperty<double>();
             
             CanUpgrade = _financeModel.Money
@@ -35,6 +35,9 @@ namespace GameCode.Elevator
             
             // Update dependent properties when the level changes
             _level.Subscribe(_ => UpdateLevelDependentProperties()).AddTo(disposable);
+            
+            // Save stash amount whenever it changes
+            StashAmount.Subscribe(_ => SaveStashAmount(_mineId)).AddTo(disposable);
             
             // Initialize dependent properties
             UpdateLevelDependentProperties();
@@ -73,6 +76,15 @@ namespace GameCode.Elevator
         {
              var mine = _unitOfWork.Mines.GetById(mineId);
              mine.elevatorLevel = _level.Value;
+             mine.elevatorStashAmount = StashAmount.Value;
+            _unitOfWork.Mines.Modify(mine);
+            //_unitOfWork.Save();
+        }
+        
+        private void SaveStashAmount(string mineId)
+        {
+            var mine = _unitOfWork.Mines.GetById(mineId);
+            mine.elevatorStashAmount = StashAmount.Value;
             _unitOfWork.Mines.Modify(mine);
             //_unitOfWork.Save();
         }
@@ -80,6 +92,11 @@ namespace GameCode.Elevator
         public void LoadLevel(int newLevel)
         {
             _level.Value = newLevel;
+        }
+        
+        public void LoadStashAmount(double amount)
+        {
+            StashAmount.Value = amount;
         }
 
         public double DrawResource(double amount)

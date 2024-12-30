@@ -50,6 +50,7 @@ namespace GameCode.Elevator
         {
             var mine = _unitOfWork.Mines.GetById(mineId);
             _model.LoadLevel(mine.elevatorLevel);
+            _model.LoadStashAmount(mine.elevatorStashAmount);
         }
     }
 }
