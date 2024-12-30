@@ -1,8 +1,10 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
+using TMPro;
 
 public class CircleFadePanel : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class CircleFadePanel : MonoBehaviour
     [SerializeField] private float duration = 1f;
     [SerializeField] private float startRadius = 0f;
     [SerializeField] private float endRadius = 1f;
+    [SerializeField] private TMP_Text txtMineName;
     
     // Optional: Inspector reference to the circle center position
     [SerializeField] private Vector2 circleCenter = new Vector2(0.5f, 0.5f);
@@ -47,12 +50,15 @@ public class CircleFadePanel : MonoBehaviour
 
     public async UniTask FadeOut()
     {
+        txtMineName.gameObject.SetActive(true);
+        txtMineName.text = PlayerPrefs.GetString("CurrentMine");
         await DOTween.To(
             () => endRadius,
             value => fadeMaterial.SetFloat(CircleRadius, value),
             startRadius,
             duration
         ).SetEase(Ease.InOutCubic).ToUniTask();
+        txtMineName.gameObject.SetActive(false);
         fadeImage.enabled = false;
     }
 
