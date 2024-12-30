@@ -4,6 +4,7 @@
       "id": "mine01",
       "elevatorLevel": 1,
       "warehouseLevel": 1,
+      "elevatorStashAmount": 0,
       "mineshafts": [
         {
           "mineshaftNumber": 1,
@@ -19,6 +20,7 @@
       "id": "mine02",
       "elevatorLevel": 1,
       "warehouseLevel": 1,
+      "elevatorStashAmount": 0,
       "mineshafts": [
         {
           "mineshaftNumber": 1,

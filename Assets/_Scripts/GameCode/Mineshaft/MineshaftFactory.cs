@@ -24,10 +24,10 @@ namespace GameCode.Mineshaft
             _disposable = disposable;
         }
 
-        public void CreateMineshaft(int mineshaftNumber, int mineshaftLevel, Vector2 position, string mineId, bool isNew = true)
+        public void CreateMineshaft(int mineshaftNumber, int mineshaftLevel, Vector2 position, string mineId, double stashAmount, bool isNew = true)
         {
             var view = Object.Instantiate(_config.MineshaftConfig.MineshaftPrefab, position, Quaternion.identity);
-            var mineshaftModel = new MineshaftModel(mineshaftNumber, mineshaftLevel,position, _config, _financeModel, _disposable, _unitOfWork, mineId, isNew);
+            var mineshaftModel = new MineshaftModel(mineshaftNumber, mineshaftLevel,position, _config, _financeModel, _disposable, _unitOfWork, mineId, stashAmount, isNew);
             new MineshaftController(view, mineshaftModel, this, _config, _disposable, mineId);
             _collectionModel.RegisterMineshaft(mineshaftNumber, mineshaftModel, view);
         }
@@ -70,6 +70,7 @@ namespace GameCode.Mineshaft
                     mineshaftData.level,
                     mineshaftData.position,
                     mineId,
+                    mineshaftData.mineshaftStashAmount,
                     isNew: false
                 );
             }

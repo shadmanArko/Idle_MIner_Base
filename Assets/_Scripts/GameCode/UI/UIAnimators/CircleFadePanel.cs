@@ -51,7 +51,7 @@ public class CircleFadePanel : MonoBehaviour
     public async UniTask FadeOut()
     {
         txtMineName.gameObject.SetActive(true);
-        txtMineName.text = PlayerPrefs.GetString("CurrentMine");
+        txtMineName.text = PlayerPrefsManager.CurrentMineId;
         await DOTween.To(
             () => endRadius,
             value => fadeMaterial.SetFloat(CircleRadius, value),

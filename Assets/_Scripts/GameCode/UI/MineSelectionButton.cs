@@ -22,10 +22,9 @@ public class MineSelectionButton : MonoBehaviour
 
     public async UniTask SetCurrentMine(string mineId)
     {
-        PlayerPrefs.SetString("CurrentMine", mineId);
-        PlayerPrefs.Save();
         
-        Debug.Log(PlayerPrefs.GetString("CurrentMine"));
+        PlayerPrefsManager.CurrentMineId = mineId;
+        
     }
     
     public async UniTask RestartCurrentSceneAsync()

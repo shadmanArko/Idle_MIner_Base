@@ -10,7 +10,11 @@ public class SaveManager : MonoBehaviour
         InvokeRepeating(nameof(SaveData), 5.0f, 5.0f);
     }
 
-    private void SaveData() => _unitOfWork.Save();
+    private void SaveData()
+    {
+        _unitOfWork.Save();
+        PlayerPrefs.Save();
+    }
 
     // public void Dispose()
     // {

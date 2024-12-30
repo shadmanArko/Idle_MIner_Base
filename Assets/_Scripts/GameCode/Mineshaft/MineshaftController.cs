@@ -54,7 +54,7 @@ namespace GameCode.Mineshaft
         {
             _model.BuyNextShaft();
             _view.NextShaftView.Visible = false;
-            _mineshaftFactory.CreateMineshaft(_model.MineshaftNumber + 1, 1, _view.NextShaftView.NextShaftPosition, mineId);
+            _mineshaftFactory.CreateMineshaft(_model.MineshaftNumber + 1, 1, _view.NextShaftView.NextShaftPosition, mineId, 0);
         }
     }
 }

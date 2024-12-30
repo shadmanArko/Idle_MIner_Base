@@ -11,7 +11,7 @@ namespace GameCode.Finance
 
         public FinanceModel(CompositeDisposable disposable)
         {
-            _money = new ReactiveProperty<double>(PlayerPrefs.GetFloat("GlobalMoney"));
+            _money = new ReactiveProperty<double>(PlayerPrefsManager.Money);
             _money.Subscribe(_ => SaveMoney()).AddTo(disposable);
         }
 
@@ -45,16 +45,7 @@ namespace GameCode.Finance
         
         private void SaveMoney()
         {
-            PlayerPrefs.SetFloat("GlobalMoney", (float)_money.Value);
-            PlayerPrefs.Save();
-            //var mine = _unitOfWork.Mines.GetById(mineId);
-            // if (mine == null)
-            // {
-            //     Debug.LogWarning($"No mine {mineId} found!");
-            // }
-            // mine.money = _money.Value;
-            // _unitOfWork.Mines.Modify(mine);
-            //_unitOfWork.Save();
+            PlayerPrefsManager.Money = (float)_money.Value;
         }
     }
 }

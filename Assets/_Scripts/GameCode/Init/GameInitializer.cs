@@ -51,14 +51,14 @@ namespace GameCode.Init
             //mineshaftFactory.CreateMineshaft(1,1, _mineshaftStartingPosition.position, "mine01");
 
             //Elevator
-            var elevatorModel = new ElevatorModel(1, _gameConfig, financeModel, disposable, _unitOfWork, PlayerPrefs.GetString("CurrentMine") );
+            var elevatorModel = new ElevatorModel(1, _gameConfig, financeModel, disposable, _unitOfWork, PlayerPrefsManager.CurrentMineId );
             var elevatorController =  new ElevatorController(_elevatorView, elevatorModel, mineshaftCollectionModel, _gameConfig, _unitOfWork, disposable);
             
             //Warehouse
-            var warehouseModel = new WarehouseModel(1, _gameConfig, financeModel, disposable, _unitOfWork, PlayerPrefs.GetString("CurrentMine") );
+            var warehouseModel = new WarehouseModel(1, _gameConfig, financeModel, disposable, _unitOfWork, PlayerPrefsManager.CurrentMineId );
             var warehouseController = new WarehouseController(_warehouseView, warehouseModel, elevatorModel, _gameConfig, disposable, _unitOfWork);
 
-            new LoadManager(elevatorController, mineshaftFactory,PlayerPrefs.GetString("CurrentMine"), warehouseController);
+            new LoadManager(elevatorController, mineshaftFactory,PlayerPrefsManager.CurrentMineId, warehouseController);
         }
     }
 }
