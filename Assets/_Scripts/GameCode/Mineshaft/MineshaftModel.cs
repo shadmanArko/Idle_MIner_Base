@@ -16,7 +16,7 @@ namespace GameCode.Mineshaft
         private readonly UnitOfWork _unitOfWork;
         
         public int MineshaftNumber { get; }
-        public string MineId { get; }
+        private string MineId { get; }
 
         public IReadOnlyReactiveProperty<bool> CanUpgrade { get; }
 
@@ -40,7 +40,7 @@ namespace GameCode.Mineshaft
             MineId = mineId;
             
             _level = new ReactiveProperty<int>(level);
-            StashAmount = new ReactiveProperty<double>();
+            StashAmount = new ReactiveProperty<double>(_unitOfWork.Mines.GetById(mineId).mineshafts.FirstOrDefault(data => data.mineshaftNumber == MineshaftNumber)!.mineshaftStashAmount);
             SkillMultiplier = Mathf.Pow(_config.ActorSkillIncrementPerShaft, MineshaftNumber) * Mathf.Pow(config.ActorUpgradeSkillIncrement, _level.Value - 1);
             
             _upgradePrice = new ReactiveProperty<double>(BasePrice * Mathf.Pow(config.ActorPriceIncrementPerShaft, MineshaftNumber - 1)
@@ -55,6 +55,7 @@ namespace GameCode.Mineshaft
                 .ToReadOnlyReactiveProperty()
                 .AddTo(disposable);
 
+            StashAmount.Subscribe(_ => SaveStashAmount(MineId)).AddTo(disposable);
             if (isNew)
             {
                 var mineshaftData = new MineshaftData
@@ -90,10 +91,23 @@ namespace GameCode.Mineshaft
             _unitOfWork.Mines.Modify(mine);
             //_unitOfWork.Save();
         }
+        
+        private void SaveStashAmount(string mineId)
+        {
+            var mine = _unitOfWork.Mines.GetById(mineId);
+            mine.mineshafts.FirstOrDefault(data => data.mineshaftNumber == MineshaftNumber)!.mineshaftStashAmount = StashAmount.Value;
+            _unitOfWork.Mines.Modify(mine);
+            //_unitOfWork.Save();
+        }
 
         public void LoadLevel(int newLevel)
         {
             _level.Value = newLevel;
+        }
+        
+        public void LoadStashAmount(double amount)
+        {
+            StashAmount.Value = amount;
         }
 
         public void BuyNextShaft()

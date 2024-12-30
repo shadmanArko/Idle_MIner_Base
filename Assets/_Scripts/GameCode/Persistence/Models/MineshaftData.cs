@@ -9,5 +9,6 @@ namespace GameCode.Persistence.Models
         public int mineshaftNumber;
         public int level;
         public Vector2 position;
+        public double mineshaftStashAmount;
     }
 }
