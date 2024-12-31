@@ -5,6 +5,7 @@
       "elevatorLevel": 1,
       "warehouseLevel": 1,
       "elevatorStashAmount": 0,
+      "money": 500,
       "mineshafts": [
         {
           "mineshaftNumber": 1,
@@ -21,6 +22,7 @@
       "elevatorLevel": 1,
       "warehouseLevel": 1,
       "elevatorStashAmount": 0,
+      "money": 500,
       "mineshafts": [
         {
           "mineshaftNumber": 1,

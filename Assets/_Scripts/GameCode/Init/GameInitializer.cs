@@ -34,7 +34,7 @@ namespace GameCode.Init
             var disposable = new CompositeDisposable().AddTo(this);
 
             var tutorialModel = new TutorialModel();
-            var financeModel = new FinanceModel(disposable);
+            var financeModel = new FinanceModel(PlayerPrefsManager.CurrentMineId, _unitOfWork, disposable);
             
             new CameraController(_cameraView, tutorialModel);
 

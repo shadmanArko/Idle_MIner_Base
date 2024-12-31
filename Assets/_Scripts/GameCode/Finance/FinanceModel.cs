@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using GameCode.Persistence.Models;
+using UniRx;
 using UnityEngine;
 
 namespace GameCode.Finance
@@ -8,10 +9,13 @@ namespace GameCode.Finance
         private readonly IReactiveProperty<double> _money;
         public IReadOnlyReactiveProperty<double> Money => _money;
         private readonly UnitOfWork _unitOfWork;
+        private readonly Mine _mine;
 
-        public FinanceModel(CompositeDisposable disposable)
+        public FinanceModel(string mineId, UnitOfWork unitOfWork, CompositeDisposable disposable)
         {
-            _money = new ReactiveProperty<double>(PlayerPrefsManager.Money);
+            _unitOfWork = unitOfWork;
+            _mine = _unitOfWork.Mines.GetById(mineId);
+            _money = new ReactiveProperty<double>(_mine.money);
             _money.Subscribe(_ => SaveMoney()).AddTo(disposable);
         }
 
@@ -45,7 +49,7 @@ namespace GameCode.Finance
         
         private void SaveMoney()
         {
-            PlayerPrefsManager.Money = (float)_money.Value;
+            _mine.money = (float)_money.Value;
         }
     }
 }

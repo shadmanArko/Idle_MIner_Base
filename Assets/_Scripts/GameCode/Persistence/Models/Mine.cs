@@ -6,6 +6,7 @@ namespace GameCode.Persistence.Models
     [Serializable]
     public class Mine : Base
     {
+        public double money;
         public int elevatorLevel;
         public int warehouseLevel;
         public double elevatorStashAmount;
