@@ -6,23 +6,22 @@ using UnityEngine.Serialization;
 
 namespace GameCode.Persistence
 {
-    public class Initializer : MonoBehaviour
+    public class Initializer
     {
-        public DataContext context;
+        private readonly DataContext _context;
 
-        [Header("Repositories")] 
-        public Mines mines;
-        
-        [Header("Other Dependencies")] 
-        public TextAsset saveDataJsonFile;
+        private readonly Mines _mines;
+
+        private readonly TextAsset _saveDataJsonFile;
 
         private static string SaveDataFilePath => $"{Application.persistentDataPath}/Saves/save_data.json";
-
-        // private async void Start()
-        // {
-        //     await LoadDataAsync();
-        // }
-
+        
+        public Initializer(DataContext context, Mines mines, TextAsset saveDataJsonFile)
+        {
+            _context = context;
+            _mines = mines;
+            _saveDataJsonFile = saveDataJsonFile;
+        }
         public async Task LoadDataAsync()
         {
             Debug.Log(Application.persistentDataPath);
@@ -37,20 +36,20 @@ namespace GameCode.Persistence
                 await BootstrapSaveData();
             }
             
-            await context.Load();
+            await _context.Load();
 
             BindContexts();
         }
 
         private void BindContexts()
         {
-            mines.context = context;
+            _mines.context = _context;
         }
 
         private async Task BootstrapSaveData()
         {
             using var writer = new StreamWriter(SaveDataFilePath);
-            await writer.WriteAsync(saveDataJsonFile.text);
+            await writer.WriteAsync(_saveDataJsonFile.text);
         }
     }
 }

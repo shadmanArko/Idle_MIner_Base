@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPrefsManager : MonoBehaviour
+public class PlayerPrefsManager
 {
+    
     private static class PrefsKeys
     {
         public const string GLOBAL_MONEY = "GlobalMoney";
@@ -13,10 +14,12 @@ public class PlayerPrefsManager : MonoBehaviour
     private const float DEFAULT_MONEY = 500f;
     private const string DEFAULT_MINE = "mine01";
 
-    void Awake()
+    
+    public PlayerPrefsManager()
     {
         InitializeIfNotExists();
     }
+    
 
     private void InitializeIfNotExists()
     {

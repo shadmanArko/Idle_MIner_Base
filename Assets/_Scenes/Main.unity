@@ -2840,8 +2840,7 @@ MonoBehaviour:
   _elevatorView: {fileID: 377378764491910551}
   _warehouseView: {fileID: 256702530}
   _mineshaftStartingPosition: {fileID: 1397787960}
-  _unitOfWork: {fileID: 1676997605}
-  _dataInitializer: {fileID: 1947834577}
+  _saveDataJsonFile: {fileID: 4900000, guid: aa53617cfc7142b8afe8b21cc0d93f26, type: 3}
 --- !u!4 &1004922426
 Transform:
   m_ObjectHideFlags: 0
@@ -3529,80 +3528,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &1237172860
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4696825920516163697, guid: 9951c145eb49a478db4eb024bee1005b,
-        type: 3}
-      propertyPath: m_Name
-      value: prefab_Data
-      objectReference: {fileID: 0}
-    - target: {fileID: 4710605566390011562, guid: 9951c145eb49a478db4eb024bee1005b,
-        type: 3}
-      propertyPath: saveDataJsonFile
-      value: 
-      objectReference: {fileID: 4900000, guid: aa53617cfc7142b8afe8b21cc0d93f26, type: 3}
-    - target: {fileID: 7608690883906854475, guid: 9951c145eb49a478db4eb024bee1005b,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7608690883906854475, guid: 9951c145eb49a478db4eb024bee1005b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 381.34744
-      objectReference: {fileID: 0}
-    - target: {fileID: 7608690883906854475, guid: 9951c145eb49a478db4eb024bee1005b,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 692.7024
-      objectReference: {fileID: 0}
-    - target: {fileID: 7608690883906854475, guid: 9951c145eb49a478db4eb024bee1005b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 4.4161997
-      objectReference: {fileID: 0}
-    - target: {fileID: 7608690883906854475, guid: 9951c145eb49a478db4eb024bee1005b,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7608690883906854475, guid: 9951c145eb49a478db4eb024bee1005b,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7608690883906854475, guid: 9951c145eb49a478db4eb024bee1005b,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7608690883906854475, guid: 9951c145eb49a478db4eb024bee1005b,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7608690883906854475, guid: 9951c145eb49a478db4eb024bee1005b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7608690883906854475, guid: 9951c145eb49a478db4eb024bee1005b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7608690883906854475, guid: 9951c145eb49a478db4eb024bee1005b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9951c145eb49a478db4eb024bee1005b, type: 3}
 --- !u!1 &1253084852
 GameObject:
   m_ObjectHideFlags: 0
@@ -4390,18 +4315,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1676997605 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4110774924495691232, guid: 9951c145eb49a478db4eb024bee1005b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1237172860}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4004e52b090dd42e79c59258bca3d549, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1707676590
 GameObject:
   m_ObjectHideFlags: 0
@@ -4928,18 +4841,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1947834577 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4710605566390011562, guid: 9951c145eb49a478db4eb024bee1005b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1237172860}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8efc017ed1bd4c0fb961a898c73964c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1986815610
 GameObject:
   m_ObjectHideFlags: 0

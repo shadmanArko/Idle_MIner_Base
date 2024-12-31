@@ -2,14 +2,19 @@ using GameCode.Persistence.Repositories;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class UnitOfWork : MonoBehaviour
+public class UnitOfWork
 {
-    [SerializeField] private DataContext _dataContext;
+    private readonly DataContext _dataContext;
 
-    [SerializeField] private Mines mines;
-    
-    
-    public Mines Mines => mines;
+    private readonly Mines _mines;
+
+    public UnitOfWork(DataContext dataContext, Mines mines)
+    {
+        _dataContext = dataContext;
+        _mines = mines;
+    }
+
+    public Mines Mines => _mines;
     
     
     public async void Save() => await _dataContext.Save();

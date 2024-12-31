@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [Serializable]
-public abstract class DataContext : MonoBehaviour
+public abstract class DataContext
 {
     public SaveData saveData = new SaveData();
     
@@ -19,7 +19,7 @@ public abstract class DataContext : MonoBehaviour
     {
         if (typeof(T) == typeof(Mine))
         {
-            return saveData.mines as List<T>;
+            return saveData.mines as List<T>; 
         }
         //
         // if (typeof(T) == typeof(Temple))

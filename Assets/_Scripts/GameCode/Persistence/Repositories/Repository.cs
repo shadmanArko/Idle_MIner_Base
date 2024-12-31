@@ -7,7 +7,7 @@ using UnityEngine;
 namespace GameCode.Persistence.Repositories
 {
     [Serializable]
-    public abstract class Repository<T> : MonoBehaviour where T : Base
+    public abstract class Repository<T> where T : Base
     {
         [HideInInspector] public DataContext context;
 
