@@ -2,6 +2,8 @@
   "mines": [
     {
       "id": "mine01",
+      "name": "Mine 1",
+      "description": "This is your first mine in which you start of your tycoon journey",
       "elevatorLevel": 1,
       "warehouseLevel": 1,
       "elevatorStashAmount": 0,
@@ -19,6 +21,8 @@
     },
     {
       "id": "mine02",
+      "name": "Mine 2",
+      "description": "So exciting: A Second mine!",
       "elevatorLevel": 1,
       "warehouseLevel": 1,
       "elevatorStashAmount": 0,

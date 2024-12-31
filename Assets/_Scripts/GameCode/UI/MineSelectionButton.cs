@@ -1,30 +1,17 @@
-using System;
-using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cysharp.Threading.Tasks;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class MineSelectionButton : MonoBehaviour
 {
-    private Button _button;
-    //[SerializeField] private ButtonMoveAnimator _buttonMoveAnimator;
+    [SerializeField]private Button _button;
     
     public Button Button => _button;
-   // public ButtonMoveAnimator ButtonMoveAnimator => _buttonMoveAnimator;
-    
-    private void Start()
-    {
-        _button = GetComponent<Button>();
-        //_buttonMoveAnimator = GetComponent<ButtonMoveAnimator>();
-    }
-
+   
     public async UniTask SetCurrentMine(string mineId)
     {
-        
         PlayerPrefsManager.CurrentMineId = mineId;
-        
     }
     
     public async UniTask RestartCurrentSceneAsync()

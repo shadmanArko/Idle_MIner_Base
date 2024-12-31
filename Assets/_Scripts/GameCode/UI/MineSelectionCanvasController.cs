@@ -3,19 +3,32 @@ using Cysharp.Threading.Tasks;
 using GameCode.UI;
 using UniRx;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class MineSelectionCanvasController
 {
     private readonly MineSelectionCanvasView _view;
-
-    public MineSelectionCanvasController(MineSelectionCanvasView view, CompositeDisposable disposable)
+    
+    public MineSelectionCanvasController(MineSelectionCanvasView view, CompositeDisposable disposable, UnitOfWork unitOfWork, MineSelectionCard mineSelectionCardPrefab)
     {
         _view = view;
 
         BindButton(_view.OpenMineSelection.OnClickAsObservable(), async () => await ShowMineSelection(), disposable);
         BindButton(_view.CloseMineSelection.OnClickAsObservable(), async () => await HideMineSelection(), disposable);
-        BindButton(_view.MineSelectionButtonMine01.Button.OnClickAsObservable(), async () => await SelectMine("mine01"), disposable);
-        BindButton(_view.MineSelectionButtonMine02.Button.OnClickAsObservable(), async () => await SelectMine("mine02"), disposable);
+        
+        foreach (var mine in unitOfWork.Mines.GetAll())
+        {
+            var mineSelectionCard = Object.Instantiate(mineSelectionCardPrefab, _view.MineSelectionCardsParent);
+            mineSelectionCard.MineNameText.text = mine.name;
+            mineSelectionCard.MineDescriptionText.text = mine.description;
+            var mineSelectionButton = mineSelectionCard.MineSelectionButton;
+            if (mineSelectionButton?.Button == null)
+            {
+                Debug.LogError("Button component is missing!");
+                return;
+            }
+            BindButton(mineSelectionButton.Button.OnClickAsObservable(), async () => await SelectMine(mine.id, mineSelectionButton), disposable);
+        }
     }
 
     private void BindButton(IObservable<Unit> buttonObservable, Func<UniTask> action, CompositeDisposable disposable)
@@ -41,13 +54,13 @@ public class MineSelectionCanvasController
         );
     }
 
-    private async UniTask SelectMine(string mineId)
+    private async UniTask SelectMine(string mineId, MineSelectionButton mineSelectionButton)
     {
-        await _view.MineSelectionButtonMine01.SetCurrentMine(mineId);
+        await mineSelectionButton.SetCurrentMine(mineId);
         await HideMineSelection();
         await _view.CircleFadeIn.FadeIn();
         await UniTask.DelayFrame(1); 
-        await _view.MineSelectionButtonMine01.RestartCurrentSceneAsync();
+        await mineSelectionButton.RestartCurrentSceneAsync();
     }
     
 }

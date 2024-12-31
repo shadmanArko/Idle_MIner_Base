@@ -19,14 +19,12 @@ namespace GameCode.Init
         [SerializeField] private CameraView _cameraView;
         
         [SerializeField] private MineSelectionCanvasView _mineSelectionCanvasView;
+        [SerializeField] private MineSelectionCard _mineSelectionCard;
         
         [SerializeField] private ElevatorView _elevatorView;
         [SerializeField] private WarehouseView _warehouseView;
         [SerializeField] private Transform _mineshaftStartingPosition;
-
-        //[SerializeField] private UnitOfWork _unitOfWork;
-        //[SerializeField] private Initializer _dataInitializer;
-        //[SerializeField] private DataContext _dataContext;
+        
         [SerializeField] private TextAsset _saveDataJsonFile;
         
 
@@ -55,7 +53,7 @@ namespace GameCode.Init
             new HudController(_hudView, financeModel, tutorialModel, disposable);
             
             //MineSelectionCanvas
-            new MineSelectionCanvasController(_mineSelectionCanvasView, disposable);
+            new MineSelectionCanvasController(_mineSelectionCanvasView, disposable, unitOfWork, _mineSelectionCard);
 
             //Mineshaft
             var mineshaftCollectionModel = new MineshaftCollectionModel();
