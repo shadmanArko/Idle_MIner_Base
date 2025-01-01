@@ -21,7 +21,6 @@ public class ButtonMoveAnimator : MonoBehaviour
             Debug.LogError("Button or RectTransform is not assigned.");
             return;
         }
-
         
         // Observe the button's hold and release events
         var buttonDownStream = button.OnPointerDownAsObservable();
