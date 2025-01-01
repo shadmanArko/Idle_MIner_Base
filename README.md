@@ -73,8 +73,9 @@ The game state is managed using the following models:
 
 ## How to Run
 1. Open the project in Unity 2021.3.13f1.
-2. Play the game in the editor.
-3. Use the mine selection panel to switch between mines and observe the state persistence.
+2. Open Assets -> _Scenes -> Main
+3. Play the game in the editor.
+4. Use the mine selection panel to switch between mines and observe the state persistence.
 
 ## Possible Improvements
 - Add more mines dynamically without hardcoding.
