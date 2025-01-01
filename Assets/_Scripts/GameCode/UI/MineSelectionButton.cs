@@ -19,7 +19,6 @@ public class MineSelectionButton : MonoBehaviour
         string currentScene = SceneManager.GetActiveScene().name;
         var operation = SceneManager.LoadSceneAsync(currentScene);
         
-        // It's optional for loading progress view
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);

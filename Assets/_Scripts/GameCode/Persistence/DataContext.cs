@@ -1,8 +1,13 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GameCode.Persistence;
 using GameCode.Persistence.Models;
+using UnityEngine;
+using UnityEngine.Serialization;
 
+[Serializable]
 public abstract class DataContext
 {
     public SaveData saveData = new SaveData();
@@ -16,6 +21,12 @@ public abstract class DataContext
         {
             return saveData.mines as List<T>; 
         }
+        //
+        // if (typeof(T) == typeof(Temple))
+        // {
+        //     return gameData.temples as List<T>;
+        // }
+        
         return null;
     }
 }

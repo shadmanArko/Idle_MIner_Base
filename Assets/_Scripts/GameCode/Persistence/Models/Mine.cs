@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace GameCode.Persistence.Models
 {
+    [Serializable]
     public class Mine : Base
     {
         public string name;

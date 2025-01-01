@@ -35,7 +35,7 @@ namespace GameCode.Init
             var dataContext = new JsonDataContext();
             var mines = new Mines();
             var disposable = new CompositeDisposable().AddTo(this);
-            var dataInitializer = new DataInitializer(dataContext, mines, _saveDataJsonFile);
+            var dataInitializer = new Initializer(dataContext, mines, _saveDataJsonFile);
             var unitOfWork = new UnitOfWork(dataContext, mines);
             await dataInitializer.LoadDataAsync();
             var saveManager = new SaveManager(unitOfWork, disposable);
