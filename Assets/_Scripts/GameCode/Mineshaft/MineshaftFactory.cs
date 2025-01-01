@@ -31,38 +31,9 @@ namespace GameCode.Mineshaft
             new MineshaftController(view, mineshaftModel, this, _config, _disposable, mineId);
             _collectionModel.RegisterMineshaft(mineshaftNumber, mineshaftModel, view);
         }
-
         
-        
-        public void DestroyMineshaft(int mineshaftNumber)
-        {
-            var view = _collectionModel.GetView(mineshaftNumber);
-            if (view != null)
-            {
-                Object.Destroy(view.gameObject);
-            }
-            _collectionModel.UnregisterMineshaft(mineshaftNumber);
-        }
-
-        public void DestroyAllMineshafts()
-        {
-            foreach (var mineshaftNumber in _collectionModel.GetAllMineshaftNumbers())
-            {
-                var view = _collectionModel.GetView(mineshaftNumber);
-                if (view != null)
-                {
-                    Object.Destroy(view.gameObject);
-                }
-            }
-            _collectionModel.ClearAllMineshafts();
-        }
-
         public void LoadData(string mineId)
         {
-            // Clear existing mineshafts
-            //DestroyAllMineshafts();
-
-            // Create new mineshafts based on data
             foreach (var mineshaftData in _unitOfWork.Mines.GetById(mineId).mineshafts.ToList())
             {
                 CreateMineshaft(
