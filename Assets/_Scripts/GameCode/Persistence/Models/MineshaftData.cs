@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace GameCode.Persistence.Models
 {
-    [Serializable]
     public class MineshaftData
     {
         public int mineshaftNumber;

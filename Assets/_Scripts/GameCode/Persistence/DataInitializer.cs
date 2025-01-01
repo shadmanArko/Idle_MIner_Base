@@ -2,11 +2,10 @@ using System.IO;
 using System.Threading.Tasks;
 using GameCode.Persistence.Repositories;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace GameCode.Persistence
 {
-    public class Initializer
+    public class DataInitializer
     {
         private readonly DataContext _context;
 
@@ -16,7 +15,7 @@ namespace GameCode.Persistence
 
         private static string SaveDataFilePath => $"{Application.persistentDataPath}/Saves/save_data.json";
         
-        public Initializer(DataContext context, Mines mines, TextAsset saveDataJsonFile)
+        public DataInitializer(DataContext context, Mines mines, TextAsset saveDataJsonFile)
         {
             _context = context;
             _mines = mines;

@@ -4,7 +4,6 @@ using GameCode.Persistence.Models;
 
 namespace GameCode.Persistence
 {
-    [Serializable]
     public class SaveData
     {
         public List<Mine> mines;

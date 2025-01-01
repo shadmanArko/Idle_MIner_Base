@@ -100,17 +100,7 @@ namespace GameCode.Mineshaft
             _unitOfWork.Mines.Modify(mine);
             //_unitOfWork.Save();
         }
-
-        public void LoadLevel(int newLevel)
-        {
-            _level.Value = newLevel;
-        }
         
-        public void LoadStashAmount(double amount)
-        {
-            StashAmount.Value = amount;
-        }
-
         public void BuyNextShaft()
         {
             if (_financeModel.Money.Value < NextShaftPrice)

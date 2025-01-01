@@ -2,7 +2,6 @@
 using GameCode.Mineshaft;
 using GameCode.Worker;
 using UniRx;
-using UnityEngine.UI;
 
 namespace GameCode.Elevator
 {

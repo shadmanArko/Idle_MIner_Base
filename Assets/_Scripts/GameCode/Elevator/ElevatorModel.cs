@@ -33,13 +33,10 @@ namespace GameCode.Elevator
                 .ToReadOnlyReactiveProperty()
                 .AddTo(disposable);
             
-            // Update dependent properties when the level changes
             _level.Subscribe(_ => UpdateLevelDependentProperties()).AddTo(disposable);
             
-            // Save stash amount whenever it changes
             StashAmount.Subscribe(_ => SaveStashAmount(_mineId)).AddTo(disposable);
             
-            // Initialize dependent properties
             UpdateLevelDependentProperties();
             
         }

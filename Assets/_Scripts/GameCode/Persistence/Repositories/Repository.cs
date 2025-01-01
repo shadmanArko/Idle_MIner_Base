@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,7 +5,6 @@ using UnityEngine;
 
 namespace GameCode.Persistence.Repositories
 {
-    [Serializable]
     public abstract class Repository<T> where T : Base
     {
         [HideInInspector] public DataContext context;
@@ -17,6 +15,7 @@ namespace GameCode.Persistence.Repositories
         {
             return Entities.FirstOrDefault(e => e.id == id);
         }
+        
         public List<T> GetAll()
         {
             return Entities;
