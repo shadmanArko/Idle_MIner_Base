@@ -30,20 +30,19 @@ namespace GameCode.Init
 
         private async void Start()
         {
+            var disposable = new CompositeDisposable().AddTo(this);
+            
             //Persistence
-           new PlayerPrefsManager();
+            new PlayerPrefsManager();
             var dataContext = new JsonDataContext();
             var mines = new Mines();
-            var disposable = new CompositeDisposable().AddTo(this);
             var dataInitializer = new Initializer(dataContext, mines, _saveDataJsonFile);
             var unitOfWork = new UnitOfWork(dataContext, mines);
             await dataInitializer.LoadDataAsync();
             var saveManager = new SaveManager(unitOfWork, disposable);
             saveManager.StartPeriodicSave();
-            //InvokeRepeating(nameof(unitOfWork.Save),5f, 5f);
             
             
-
             var tutorialModel = new TutorialModel();
             var financeModel = new FinanceModel(PlayerPrefsManager.CurrentMineId, unitOfWork, disposable);
             
@@ -58,9 +57,7 @@ namespace GameCode.Init
             //Mineshaft
             var mineshaftCollectionModel = new MineshaftCollectionModel();
             var mineshaftFactory = new MineshaftFactory(mineshaftCollectionModel, financeModel, _gameConfig, unitOfWork, disposable);
-            //mineshaftFactory.LoadMineData(PlayerPrefs.GetString("CurrentMine"));
-            //mineshaftFactory.CreateMineshaft(1,1, _mineshaftStartingPosition.position, "mine01");
-
+            
             //Elevator
             var elevatorModel = new ElevatorModel(1, _gameConfig, financeModel, disposable, unitOfWork, PlayerPrefsManager.CurrentMineId );
             var elevatorController =  new ElevatorController(_elevatorView, elevatorModel, mineshaftCollectionModel, _gameConfig, unitOfWork, disposable);
