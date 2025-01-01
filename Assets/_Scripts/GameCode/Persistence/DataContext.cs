@@ -21,12 +21,6 @@ public abstract class DataContext
         {
             return saveData.mines as List<T>; 
         }
-        //
-        // if (typeof(T) == typeof(Temple))
-        // {
-        //     return gameData.temples as List<T>;
-        // }
-        
         return null;
     }
 }
