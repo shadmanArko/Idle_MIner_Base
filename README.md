@@ -1,4 +1,4 @@
-# Kolibri Task - for Arko
+# Idle_Miner_Base
 
 ## Overview
 The main objective was to implement a mine-switching feature in a simplified version of *Idle Miner Tycoon*.
